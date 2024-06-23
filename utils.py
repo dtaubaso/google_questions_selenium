@@ -1,9 +1,29 @@
 import streamlit as st
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.os_manager import ChromeType
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 import urllib, time
+
+
+# instanciar el servicio de selenium
+service = Service()
+options = webdriver.ChromeOptions()
+# agrego las opciones para que funcione en colab
+options.add_argument("--headless")
+options.add_argument("--disable-gpu")
+
+
+@st.cache_resource
+def get_driver():
+        return webdriver.Chrome(
+            service=Service(
+                ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
+            ),
+            options=options,
+        )
 
 def obtener_preguntas(kw, pais, lang, clicks):
   # url de google para generar una query
@@ -12,13 +32,8 @@ def obtener_preguntas(kw, pais, lang, clicks):
   query = urllib.parse.quote(kw)
   # genero la url
   url = f"{base_url}{query}&hl={lang}&gl={pais}"
-  # instanciar el servicio de selenium
-  service = Service()
-  options = webdriver.ChromeOptions()
-  # agrego las opciones para que funcione en colab
-  options.add_argument("--headless")
-  # genero el driver
-  driver = webdriver.Chrome(service=service, options=options)
+  
+  driver = get_driver()
   # "with" me va a cerrar el driver una vez que finalizó
   with driver:
     # voy a la url
