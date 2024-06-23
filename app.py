@@ -11,11 +11,12 @@ st.image('https://i.imgur.com/ycoUH4F.png', use_column_width=True)
 st.title("Google's People Also Ask... More")
 
 with st.expander('About this app'):
-    st.write("""This app allows you to get many more results 
-             than the default four in Google's "People Also Ask" section. 
-             By clicking on each question, you can uncover more related questions. 
-             You can select your keyword, country, language, and the number of clicks.
-             """)
+    st.write("""This app allows you to get many more results than the default four in Google's "People Also Ask" section. 
+
+By clicking on each question, you can uncover more related questions. 
+
+You can select your keyword, country, language, and the number of clicks the browser will perform.
+""")
 
 st.sidebar.header('Input')
 
