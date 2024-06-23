@@ -2,13 +2,20 @@ import streamlit as st
 import time
 from utils import obtener_preguntas
 
-st.set_page_config(page_title="Google Questions", page_icon=":question:")
+st.set_page_config(page_title="People Also Ask... More", page_icon=":eyes:")
+
+# Agregar una imagen antes del título
+st.image('https://i.imgur.com/ycoUH4F.png', use_column_width=True)
 
 # Configurar la interfaz de usuario de Streamlit
-st.title("Búsqueda de Resultados")
+st.title("Google's People Also Ask... More")
 
 with st.expander('About this app'):
-    st.write('This app shows the various ways on how you can layout your Streamlit app.')
+    st.write("""This app allows you to get much more than the default 
+             four results in Google's People Also Ask field, by clicking on each question
+             and then obtaining more questions. You can select your Keyword,
+             Country, Language and amount of Clicks.
+             """)
 
 st.sidebar.header('Input')
 
@@ -34,31 +41,31 @@ def reset_fields():
     st.rerun()  # Recargar la aplicación para actualizar la UI
 
 # Campos de entrada para los parámetros
-st.session_state.keyword = st.sidebar.text_input("Palabra clave (Keyword)", st.session_state.keyword)
-st.session_state.pais = st.sidebar.text_input("País", st.session_state.pais)
-st.session_state.idioma = st.sidebar.text_input("Idioma", st.session_state.idioma)
-cantidad_clicks = st.sidebar.number_input("Cantidad de clicks", min_value=1, max_value=20, value=5)
+st.session_state.keyword = st.sidebar.text_input("Your keyword", st.session_state.keyword)
+st.session_state.pais = st.sidebar.text_input("Country", st.session_state.pais)
+st.session_state.idioma = st.sidebar.text_input("Language", st.session_state.idioma)
+cantidad_clicks = st.sidebar.number_input("Clicks", min_value=1, max_value=20, value=2)
 
 # Botones de búsqueda y reset
 buscar, reset = st.sidebar.columns([1, 1])
 
-if buscar.button("Buscar"):
+if buscar.button("Search"):
     # Verifica si los campos no están vacíos
     if st.session_state.keyword and st.session_state.pais and st.session_state.idioma:
         # Llamar a la función de búsqueda con los parámetros dados
-        with st.spinner('Realizando búsqueda...'):
+        with st.spinner('Processing...'):
             st.session_state.resultados = obtener_preguntas(st.session_state.keyword, st.session_state.pais, st.session_state.idioma, cantidad_clicks)
         st.session_state.search_performed = True
     else:
         # Mostrar mensaje de error si faltan campos requeridos
-        st.error("Por favor, complete todos los campos.")
+        st.error("Please fill out all the fields.")
 
 if reset.button("Reset"):
     reset_fields()  # Llamar a la función para restablecer los campos y recargar la aplicación
 
 # Mostrar los resultados si existen
 if st.session_state.resultados:
-    st.write("Resultados:")
+    st.write("Results:")
     for i, resultado in enumerate(st.session_state.resultados):
         st.write(f"{i+1} - {resultado}")
 
@@ -68,10 +75,10 @@ if st.session_state.resultados:
     kw_name = st.session_state.keyword.replace(" ", "_")
     # Botón para descargar el archivo de texto
     st.download_button(
-        label="Descargar resultados como archivo de texto",
+        label="Download results as a text file.",
         data=resultados_texto,
-        file_name= f'resultados_{kw_name}_{int(time.time())}.txt',  # Usar el timestamp Unix en el nombre del archivo
+        file_name= f'results_{kw_name}_{int(time.time())}.txt',  # Usar el timestamp Unix en el nombre del archivo
         mime='text/plain'
     )
 elif st.session_state.search_performed:
-    st.error("No se encontraron resultados")
+    st.error("No results found")
