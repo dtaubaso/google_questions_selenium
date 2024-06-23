@@ -8,7 +8,7 @@ st.set_page_config(page_title="Google Questions", page_icon=":question:")
 st.title("Búsqueda de Resultados")
 
 with st.expander('About this app'):
-  st.write('This app shows the various ways on how you can layout your Streamlit app.')
+    st.write('This app shows the various ways on how you can layout your Streamlit app.')
 
 st.sidebar.header('Input')
 
@@ -23,6 +23,15 @@ if 'resultados' not in st.session_state:
     st.session_state.resultados = []
 if 'search_performed' not in st.session_state:
     st.session_state.search_performed = False
+
+# Función para restablecer los campos de entrada
+def reset_fields():
+    st.session_state.keyword = ''
+    st.session_state.pais = ''
+    st.session_state.idioma = ''
+    st.session_state.resultados = []
+    st.session_state.search_performed = False
+    st.rerun()  # Recargar la aplicación para actualizar la UI
 
 # Campos de entrada para los parámetros
 st.session_state.keyword = st.sidebar.text_input("Palabra clave (Keyword)", st.session_state.keyword)
@@ -45,11 +54,7 @@ if buscar.button("Buscar"):
         st.error("Por favor, complete todos los campos.")
 
 if reset.button("Reset"):
-    st.session_state.keyword = ''
-    st.session_state.pais = ''
-    st.session_state.idioma = ''
-    st.session_state.resultados = []
-    st.session_state.search_performed = False
+    reset_fields()  # Llamar a la función para restablecer los campos y recargar la aplicación
 
 # Mostrar los resultados si existen
 if st.session_state.resultados:
