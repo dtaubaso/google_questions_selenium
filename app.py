@@ -43,8 +43,8 @@ def reset_fields():
 
 # Campos de entrada para los parámetros
 st.session_state.keyword = st.sidebar.text_input("Your keyword", st.session_state.keyword)
-st.session_state.pais = st.sidebar.text_input("Country", st.session_state.pais)
-st.session_state.idioma = st.sidebar.text_input("Language", st.session_state.idioma)
+st.session_state.pais = st.sidebar.text_input("Country (two letters ISO format)", st.session_state.pais)
+st.session_state.idioma = st.sidebar.text_input("Language (two letters ISO format)", st.session_state.idioma)
 cantidad_clicks = st.sidebar.number_input("Clicks", min_value=1, max_value=20, value=2)
 
 # Botones de búsqueda y reset
