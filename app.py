@@ -81,5 +81,7 @@ if st.session_state.resultados:
         file_name= f'results_{kw_name}_{int(time.time())}.txt',  # Usar el timestamp Unix en el nombre del archivo
         mime='text/plain'
     )
+    st.write("")
+    st.markdown(body="[![Invitame un café en cafecito.app](https://cdn.cafecito.app/imgs/buttons/button_4.svg)](https://cafecito.app/daezta)")
 elif st.session_state.search_performed:
     st.error("No results found")
