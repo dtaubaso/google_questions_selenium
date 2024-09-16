@@ -16,10 +16,12 @@ google_analytics_code = """
 </script>
 """
 
-# Insertar el código en la app
-components.html(google_analytics_code)
+
 
 st.set_page_config(page_title="People Also Ask... More", page_icon=":eyes:")
+
+# Insertar el código en la app
+components.html(google_analytics_code)
 
 # Agregar una imagen antes del título
 st.image('https://i.imgur.com/ycoUH4F.png', use_column_width=True)
