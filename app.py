@@ -1,6 +1,23 @@
 import streamlit as st
 import time
 from utils import obtener_preguntas
+import streamlit.components.v1 as components
+
+# Código de Google Analytics
+google_analytics_code = """
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HDHW67G3Z9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HDHW67G3Z9');
+</script>
+"""
+
+# Insertar el código en la app
+components.html(google_analytics_code)
 
 st.set_page_config(page_title="People Also Ask... More", page_icon=":eyes:")
 
