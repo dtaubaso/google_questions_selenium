@@ -12,20 +12,11 @@ import urllib, time
 service = Service()
 options = webdriver.ChromeOptions()
 # agrego las opciones para que funcione en colab
-options.add_argument("--headless")
+options.add_argument("--headless=new")
 options.add_argument("--disable-gpu")
 options.add_argument("--disable-blink-features=AutomationControlled")
-options.add_argument("--enable-javascript")
-options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
-options.add_argument("--disable-extensions")
-options.add_argument("--disable-crash-reporter")
-options.add_argument("--disable-in-process-stack-traces")
-options.add_argument("--disable-logging")
-options.add_argument("--disable-web-security")
-options.add_argument("--disable-features=NetworkService,NetworkServiceInProcess")
-options.add_argument("--window-size=1280,1024")
-options.add_argument("--blink-settings=imagesEnabled=false")
+options.add_argument("--enable-javascript")
 
 
 def get_driver():
