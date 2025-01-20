@@ -7,6 +7,7 @@ from webdriver_manager.core.os_manager import ChromeType
 from selenium.webdriver.common.by import By
 import urllib, time, logging
 
+logging.basicConfig(level=logging.INFO)
 
 # instanciar el servicio de selenium
 service = Service()
