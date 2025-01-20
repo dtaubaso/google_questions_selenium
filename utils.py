@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
 from selenium.webdriver.common.by import By
-import urllib, time
+import urllib, time, logging
 
 
 # instanciar el servicio de selenium
@@ -41,7 +41,7 @@ def obtener_preguntas(kw, pais, lang, clicks):
     # voy a la url
     driver.get(url)
     time.sleep(1)
-    print(driver.page_source)
+    logging.info(driver.page_source)
     # si no encuentra preguntas, detiene el proceso
     if len(driver.find_elements(By.XPATH, "//div[@jsname='pcRaIe']"))==0:
       return None
