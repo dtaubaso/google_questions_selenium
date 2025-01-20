@@ -42,6 +42,7 @@ def obtener_preguntas(kw, pais, lang, clicks):
     # voy a la url
     driver.get(url)
     time.sleep(1)
+    st.write(driver.page_source)
     logging.info(driver.page_source)
     # si no encuentra preguntas, detiene el proceso
     if len(driver.find_elements(By.XPATH, "//div[@jsname='pcRaIe']"))==0:
