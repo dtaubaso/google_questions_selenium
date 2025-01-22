@@ -66,25 +66,12 @@ def check_javascript():
     driver = webdriver.Firefox(service=service, options=options)
 
     try:
-        # Crea una página simple con JavaScript
-        html_content = """
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <title>JavaScript Test</title>
-            <script>
-                document.title = "JavaScript Enabled";
-            </script>
-        </head>
-        <body></body>
-        </html>
-        """
         with driver:
-          driver.get("data:text/html;charset=utf-8," + html_content)
-          title = driver.title
+          driver.get("https://www.whatismybrowser.com/detect/is-javascript-enabled/")
+          check = driver.find_elements(By.ID,"detected_value")
 
         # Verifica el título de la página
-        if title == "JavaScript Enabled":
+        if check.text == "Yes":
             return "JavaScript está habilitado"
         else:
             return "JavaScript está deshabilitado"
