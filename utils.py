@@ -71,7 +71,7 @@ def check_javascript():
           check = driver.find_elements(By.ID,"detected_value")
 
         # Verifica el título de la página
-        if check.text == "Yes":
+        if check[0].text == "Yes":
             return "JavaScript está habilitado"
         else:
             return "JavaScript está deshabilitado"
