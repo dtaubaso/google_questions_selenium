@@ -58,22 +58,3 @@ def obtener_preguntas(kw, pais, lang, clicks):
     for pregunta in preguntas:
       texto_preguntas.append(pregunta.text)
   return texto_preguntas
-
-def check_javascript():
-    service = Service()
-    options =webdriver.FirefoxOptions()
-    options.add_argument("--headless")  # Opcional: Ejecutar en modo headless
-    driver = webdriver.Firefox(service=service, options=options)
-
-    try:
-        with driver:
-          driver.get("https://www.whatismybrowser.com/detect/is-javascript-enabled/")
-          check = driver.find_element(By.ID,"detected_value")
-
-        # Verifica el título de la página
-        if check.text == "Yes":
-            return "JavaScript está habilitado"
-        else:
-            return "JavaScript está deshabilitado"
-    except Exception as e:
-       return e
