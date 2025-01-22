@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.INFO)
 def get_driver():
   # instanciar el servicio de selenium
   service = Service()
-  options = webdriver.ChromeOptions()
+  options = webdriver.Options()
   # agrego las opciones para que funcione
   options.add_argument("--headless=new")
   options.add_argument("--disable-gpu")
