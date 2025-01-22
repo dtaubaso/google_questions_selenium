@@ -68,10 +68,10 @@ def check_javascript():
     try:
         with driver:
           driver.get("https://www.whatismybrowser.com/detect/is-javascript-enabled/")
-          check = driver.find_elements(By.ID,"detected_value")
+          check = driver.find_element(By.ID,"detected_value")
 
         # Verifica el título de la página
-        if check[0].text == "Yes":
+        if check.text == "Yes":
             return "JavaScript está habilitado"
         else:
             return "JavaScript está deshabilitado"
