@@ -1,9 +1,6 @@
 import streamlit as st
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.core.os_manager import ChromeType
+from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
 import urllib, time, logging
 
@@ -13,20 +10,20 @@ logging.basicConfig(level=logging.INFO)
 
 
 def get_driver():
-  # instanciar el servicio de selenium
-  service = Service()
-  options = webdriver.Options()
-  # agrego las opciones para que funcione
-  options.add_argument("--headless=new")
-  options.add_argument("--disable-gpu")
-  options.add_argument("--disable-blink-features=AutomationControlled")
-  options.add_argument("--disable-dev-shm-usage")
-  options.add_argument("--enable-javascript")
-  options.add_argument("--no-sandbox")
-  return webdriver.Chrome(
-            service=service,
-            options=options
-        )
+    # Instanciar el servicio de Selenium para Firefox
+    service = Service()  # Si tienes un geckodriver específico, puedes indicar su ruta aquí
+
+    # Configurar opciones para Firefox
+    options = webdriver.FirefoxOptions()
+    options.add_argument("--headless")  # Ejecutar en modo headless
+    options.add_argument("--disable-gpu")  # Deshabilitar GPU (opcional en Firefox)
+    options.add_argument("--no-sandbox")  # Evita problemas en contenedores
+    options.set_preference("dom.webdriver.enabled", False)  # Evitar detección de Selenium
+    options.set_preference("useAutomationExtension", False)  # Similar a Chrome's disable-blink-features
+    options.set_preference("javascript.enabled", True)  # Asegura que JavaScript esté habilitado (habilitado por defecto)
+
+    # Retornar el controlador de Firefox
+    return webdriver.Firefox(service=service, options=options)
 
 def obtener_preguntas(kw, pais, lang, clicks):
   # url de google para generar una query
