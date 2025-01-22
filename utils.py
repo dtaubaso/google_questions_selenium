@@ -22,10 +22,8 @@ options.add_argument("--enable-javascript")
 
 def get_driver():
         return webdriver.Chrome(
-            service=Service(
-                ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
-            ),
-            options=options,
+            service=service,
+            options=options
         )
 
 def obtener_preguntas(kw, pais, lang, clicks):
