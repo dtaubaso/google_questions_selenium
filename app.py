@@ -1,6 +1,6 @@
 import streamlit as st
 import time
-from utils import obtener_preguntas
+from utils import obtener_preguntas, check_javascript
 import streamlit.components.v1 as components
 
 
@@ -14,6 +14,8 @@ st.image('https://i.imgur.com/ycoUH4F.png', use_container_width=True)
 
 # Configurar la interfaz de usuario de Streamlit
 st.title("Google's People Also Ask... More")
+
+st.write(f"{check_javascript()}")
 
 with st.expander('About this app'):
     st.write("""This app allows you to get many more results than the default four in Google's "People Also Ask" section. 
