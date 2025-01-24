@@ -1,6 +1,6 @@
 import streamlit as st
 from selenium import webdriver
-from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 import urllib, time, logging
 
@@ -11,19 +11,20 @@ logging.basicConfig(level=logging.INFO)
 
 def get_driver():
     # Instanciar el servicio de Selenium para Firefox
-    service = Service()  # Si tienes un geckodriver específico, puedes indicar su ruta aquí
+  service = Service()  # Si tienes un geckodriver específico, puedes indicar su ruta aquí
 
     # Configurar opciones para Firefox
-    options = webdriver.FirefoxOptions()
-    options.add_argument("--headless")  # Ejecutar en modo headless
-    options.add_argument("--disable-gpu")  # Deshabilitar GPU (opcional en Firefox)
-    options.add_argument("--no-sandbox")  # Evita problemas en contenedores
-    options.set_preference("dom.webdriver.enabled", False)  # Evitar detección de Selenium
-    options.set_preference("useAutomationExtension", False)  # Similar a Chrome's disable-blink-features
-    options.set_preference("javascript.enabled", True)  # Asegura que JavaScript esté habilitado (habilitado por defecto)
+  options = webdriver.ChromeOptions()
+  options.add_argument("--headless=new")
+  options.add_argument("--disable-gpu")
+  options.add_argument("--disable-dev-shm-usage")
+  options.add_argument("--no-sandbox")
+  options.add_argument("--disable-blink-features=AutomationControlled")
+  options.add_argument("--enable-javascript")
+  driver = webdriver.Chrome(service=service, options=options)
 
     # Retornar el controlador de Firefox
-    return webdriver.Firefox(service=service, options=options)
+  return driver
 
 def obtener_preguntas(kw, pais, lang, clicks):
   # url de google para generar una query
@@ -38,7 +39,8 @@ def obtener_preguntas(kw, pais, lang, clicks):
   with driver:
     # voy a la url
     driver.get(url)
-    time.sleep(1)
+    driver.implicitly_wait(3)
+    time.sleep(0.5)
     logging.info(driver.page_source)
     # si no encuentra preguntas, detiene el proceso
     if len(driver.find_elements(By.XPATH, "//div[@jsname='pcRaIe']"))==0:
