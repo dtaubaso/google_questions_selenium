@@ -8,11 +8,8 @@ logging.basicConfig(level=logging.INFO)
 
 
 
-
-def get_driver():
-    # Instanciar el servicio de Selenium para Firefox
+def obtener_preguntas(kw, pais, lang, clicks):
   service = Service()  # Si tienes un geckodriver específico, puedes indicar su ruta aquí
-
     # Configurar opciones para Firefox
   options = webdriver.ChromeOptions()
   options.add_argument("--headless=new")
@@ -23,10 +20,6 @@ def get_driver():
   options.add_argument("--enable-javascript")
   driver = webdriver.Chrome(service=service, options=options)
 
-    # Retornar el controlador de Firefox
-  return driver
-
-def obtener_preguntas(kw, pais, lang, clicks):
   # url de google para generar una query
   base_url = "https://www.google.com/search?q="
   # codifico la kw como html
@@ -34,7 +27,6 @@ def obtener_preguntas(kw, pais, lang, clicks):
   # genero la url
   url = f"{base_url}{query}&hl={lang}&gl={pais}"
   
-  driver = get_driver()
   # "with" me va a cerrar el driver una vez que finalizó
   with driver:
     # voy a la url
