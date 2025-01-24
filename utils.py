@@ -2,13 +2,14 @@ import streamlit as st
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-import urllib, time, logging
+import urllib, time, logging, random
 
 logging.basicConfig(level=logging.INFO)
 
-
+devices = ['Samsung Galaxy S20 Ultra', 'Pixel 3 XL', 'iPhone XR', 'Samsung Galaxy S8+']
 
 def obtener_preguntas(kw, pais, lang, clicks):
+  mobile_emulation = {"deviceName": random.choice(devices)}
   service = Service()  # Si tienes un geckodriver específico, puedes indicar su ruta aquí
     # Configurar opciones para Firefox
   options = webdriver.ChromeOptions()
@@ -18,6 +19,7 @@ def obtener_preguntas(kw, pais, lang, clicks):
   options.add_argument("--no-sandbox")
   options.add_argument("--disable-blink-features=AutomationControlled")
   options.add_argument("--enable-javascript")
+  options.add_experimental_option("mobileEmulation", mobile_emulation)
   driver = webdriver.Chrome(service=service, options=options)
 
   # url de google para generar una query
