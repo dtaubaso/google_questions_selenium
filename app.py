@@ -9,9 +9,9 @@ st.set_page_config(page_title="People Also Ask... More", page_icon=":eyes:")
 
 # Agregar una imagen antes del título
 st.image('https://i.imgur.com/ycoUH4F.png', use_container_width=True)
-st.caption(f"[Creado por Damián Taubaso](https://www.linkedin.com/in/dtaubaso/)")
 # Configurar la interfaz de usuario de Streamlit
 st.title("Google's People Also Ask... More")
+st.caption(f"[Creado por Damián Taubaso](https://www.linkedin.com/in/dtaubaso/)")
 
 
 
