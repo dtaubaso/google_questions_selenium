@@ -9,9 +9,11 @@ st.set_page_config(page_title="People Also Ask... More", page_icon=":eyes:")
 
 # Agregar una imagen antes del título
 st.image('https://i.imgur.com/ycoUH4F.png', use_container_width=True)
-
+st.caption(f"[Creado por Damián Taubaso](https://www.linkedin.com/in/dtaubaso/)")
 # Configurar la interfaz de usuario de Streamlit
 st.title("Google's People Also Ask... More")
+
+
 
 with st.expander('About this app'):
     st.write("""This app allows you to get many more results than the default four in Google's "People Also Ask" section. 
@@ -84,7 +86,5 @@ if st.session_state.resultados:
         file_name= f'results_{kw_name}_{int(time.time())}.txt',  # Usar el timestamp Unix en el nombre del archivo
         mime='text/plain'
     )
-    st.write("")
-    st.markdown(body="[![Invitame un café en cafecito.app](https://cdn.cafecito.app/imgs/buttons/button_4.svg)](https://cafecito.app/daezta)")
 elif st.session_state.search_performed:
     st.error("No results found")
